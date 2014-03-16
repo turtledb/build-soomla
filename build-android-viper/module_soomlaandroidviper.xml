@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_soomlaandroidviper" default="compile.module.soomlaandroidviper">
+  
+  <property name="module.jdk.home.soomlaandroidviper" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.soomlaandroidviper" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.soomlaandroidviper" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.soomlaandroidviper" value="${compiler.args}"/>
+  
+  <property name="soomlaandroidviper.output.dir" value="${module.soomlaandroidviper.basedir}/out/production/SoomlaAndroidViper"/>
+  
+  <path id="soomlaandroidviper.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="soomlaandroidviper.module.production.classpath">
+    <path refid="${module.jdk.classpath.soomlaandroidviper}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  <path id="soomlaandroidviper.runtime.production.module.classpath">
+    <pathelement location="${soomlaandroidviper.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <path refid="soomlaandroidstore.runtime.production.module.classpath"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  <path id="soomlaandroidviper.module.classpath">
+    <path refid="${module.jdk.classpath.soomlaandroidviper}"/>
+    <pathelement location="${soomlaandroidviper.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  <path id="soomlaandroidviper.runtime.module.classpath">
+    <pathelement location="${soomlaandroidviper.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <path refid="soomlaandroidstore.runtime.module.classpath"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.soomlaandroidviper">
+    <patternset refid="ignored.files"/>
+	
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.soomlaandroidviper">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.soomlaandroidviper"/>
+  </patternset>
+  
+  <path id="soomlaandroidviper.module.sourcepath">
+    <dirset dir="${module.soomlaandroidviper.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.soomlaandroidviper" depends="compile.module.soomlaandroidviper.production" description="Compile module SoomlaAndroidViper"/>
+  
+  <target name="compile.module.soomlaandroidviper.production" depends="compile.module.soomlaandroidstore" description="Compile module SoomlaAndroidViper; production classes">
+    <mkdir dir="${soomlaandroidviper.output.dir}"/>
+    <javac destdir="${soomlaandroidviper.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.soomlaandroidviper}/javac">
+      <compilerarg line="${compiler.args.soomlaandroidviper}"/>
+      <bootclasspath refid="soomlaandroidviper.module.bootclasspath"/>
+      <classpath refid="soomlaandroidviper.module.production.classpath"/>
+      <src refid="soomlaandroidviper.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.soomlaandroidviper"/>
+    </javac>
+    
+    <copy todir="${soomlaandroidviper.output.dir}">
+      <fileset dir="${module.soomlaandroidviper.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.soomlaandroidviper"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.soomlaandroidviper" description="cleanup module">
+    <delete dir="${soomlaandroidviper.output.dir}"/>
+  </target>
+</project>

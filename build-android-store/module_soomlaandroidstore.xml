@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_soomlaandroidstore" default="compile.module.soomlaandroidstore">
+  
+  <property name="module.jdk.home.soomlaandroidstore" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.soomlaandroidstore" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.soomlaandroidstore" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.soomlaandroidstore" value="${compiler.args}"/>
+  
+  <property name="soomlaandroidstore.output.dir" value="${module.soomlaandroidstore.basedir}/out/production/SoomlaAndroidStore"/>
+  
+  <path id="soomlaandroidstore.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="soomlaandroidstore.module.production.classpath">
+    <path refid="${module.jdk.classpath.soomlaandroidstore}"/>
+    <pathelement location="${module.soomlaandroidstore.basedir}/libs/square-otto-1.3.2.jar"/>
+  </path>
+  
+  <path id="soomlaandroidstore.runtime.production.module.classpath">
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+    <pathelement location="${module.soomlaandroidstore.basedir}/libs/square-otto-1.3.2.jar"/>
+  </path>
+  
+  <path id="soomlaandroidstore.module.classpath">
+    <path refid="${module.jdk.classpath.soomlaandroidstore}"/>
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+    <pathelement location="${module.soomlaandroidstore.basedir}/libs/square-otto-1.3.2.jar"/>
+  </path>
+  
+  <path id="soomlaandroidstore.runtime.module.classpath">
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+    <pathelement location="${module.soomlaandroidstore.basedir}/libs/square-otto-1.3.2.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.soomlaandroidstore">
+    <patternset refid="ignored.files"/>
+    <exclude name="out/**"/>
+    <exclude name="out/test/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/data/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/domain/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/domain/virtualGoods/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/domain/virtualCurrencies/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/events/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/exceptions/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/store/purchaseTypes/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/billing/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/soomla/billing/util/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/android/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/android/vending/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/com/android/vending/billing/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/res/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/res/values/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/.idea/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/.idea/scopes/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/.idea/artifacts/**"/>
+    <exclude name="out/test/SoomlaAndroidStore/.idea/copyright/**"/>
+    <exclude name="out/artifacts/**"/>
+    <exclude name="out/artifacts/SoomlaAndroidStore_jar/**"/>
+    <exclude name="out/production/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/data/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/domain/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/domain/virtualGoods/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/domain/virtualCurrencies/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/events/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/exceptions/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/store/purchaseTypes/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/billing/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/soomla/billing/util/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/android/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/android/vending/**"/>
+    <exclude name="out/production/SoomlaAndroidStore/com/android/vending/billing/**"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.soomlaandroidstore">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.soomlaandroidstore"/>
+  </patternset>
+  
+  <path id="soomlaandroidstore.module.sourcepath">
+    <dirset dir="${module.soomlaandroidstore.basedir}/../">
+      <include name="SoomlaAndroidStore/src"/>
+      <include name="SoomlaAndroidStore/gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.soomlaandroidstore" depends="compile.module.soomlaandroidstore.production" description="Compile module SoomlaAndroidStore"/>
+  
+  <target name="compile.module.soomlaandroidstore.production" description="Compile module SoomlaAndroidStore; production classes">
+    <mkdir dir="${soomlaandroidstore.output.dir}"/>
+    <javac destdir="${soomlaandroidstore.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.soomlaandroidstore}/javac">
+      <compilerarg line="${compiler.args.soomlaandroidstore}"/>
+      <bootclasspath refid="soomlaandroidstore.module.bootclasspath"/>
+      <classpath refid="soomlaandroidstore.module.production.classpath"/>
+      <src refid="soomlaandroidstore.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.soomlaandroidstore"/>
+    </javac>
+    
+    <copy todir="${soomlaandroidstore.output.dir}">
+      <fileset dir="${module.soomlaandroidstore.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.soomlaandroidstore"/>
+      </fileset>
+      <fileset dir="${module.soomlaandroidstore.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.soomlaandroidstore"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.soomlaandroidstore" description="cleanup module">
+    <delete dir="${soomlaandroidstore.output.dir}"/>
+  </target>
+</project>

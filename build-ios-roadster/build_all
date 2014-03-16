@@ -1,0 +1,23 @@
+rm -rf build
+
+echo -n "Copying SoomlaVerification.m and replacing ... "
+cp ../../ios-store/SoomlaiOSStore/SoomlaVerification.m  .
+cp ../../back-of-generator/templates/ios/example_proj/SoomlaVerification.m.swig ../ios-store/SoomlaiOSStore/SoomlaVerification.m
+echo OK
+
+xcodebuild -configuration Debug -sdk iphoneos7.1 -project ../../ios-store/SoomlaiOSStore.xcodeproj -target SoomlaiOSStore clean build CONFIGURATION_BUILD_DIR=$PWD/build/debug
+xcodebuild -configuration Release -sdk iphoneos7.1 -project ../../ios-store/SoomlaiOSStore.xcodeproj -target SoomlaiOSStore clean build CONFIGURATION_BUILD_DIR=$PWD/build/release
+
+xcodebuild -configuration Debug -sdk iphoneos7.1 -project ../../ios-roadster/SoomlaiOSRoadster.xcodeproj -target SoomlaiOSRoadster clean build CONFIGURATION_BUILD_DIR=$PWD/build/debug
+xcodebuild -configuration Release -sdk iphoneos7.1 -project ../../ios-roadster/SoomlaiOSRoadster.xcodeproj -target SoomlaiOSRoadster clean build CONFIGURATION_BUILD_DIR=$PWD/build/release
+
+echo -n "Returning SoomlaVerification.m back ... "
+mv SoomlaVerification.m ../../ios-store/SoomlaiOSStore/SoomlaVerification.m
+echo OK
+
+cp ../../soomlibraries/ios/compilations/debug/*.* build/debug/
+cp ../../soomlibraries/ios/compilations/debug/headers/public/* build/debug/headers/public/
+
+cp ../../soomlibraries/ios/compilations/release/*.* build/release/
+cp ../../soomlibraries/ios/compilations/release/headers/public/* build/release/headers/public/
+

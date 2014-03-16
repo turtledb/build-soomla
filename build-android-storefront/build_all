@@ -1,0 +1,22 @@
+set -e
+
+#ant -buildfile soomla.xml -Dlogging="true" -Dsoomla.filename="Soomla" all
+ant -buildfile soomla.xml -Dlogging="false" -Dsoomla.filename="AndroidStorefront" all
+
+#echo -n "Copying stuff to back-of-gen & engine-storefront (unity & cocos2dx) ... "
+#rm -f ../../back-of-generator/templates/android/highway-deploy/SoomlaAndroidViper.jar
+#rm -f ../../engine-storefront/unity/Java\ Source/libs/SoomlaAndroidViper.jar
+#rm -f ../../engine-storefront/cocos2dx/Java\ Source/libs/SoomlaAndroidViper.jar
+#cp ../SoomlaAndroidViperExampleDist/libs/Soomla_release.jar ../../back-of-generator/templates/android/highway-deploy/SoomlaAndroidViper.jar
+#cp ../SoomlaAndroidViperExampleDist/libs/Soomla_release.jar ../../engine-storefront/unity/Java\ Source/libs/SoomlaAndroidViper.jar
+#cp ../SoomlaAndroidViperExampleDist/libs/Soomla_release.jar ../../engine-storefront/cocos2dx/Java\ Source/libs/SoomlaAndroidViper.jar
+
+#cp libs/square-otto-1.3.2.jar ../../engine-storefront/unity/Java\ Source/libs/square-otto-1.3.2.jar
+#cp libs/socketio.jar ../../engine-storefront/unity/Java\ Source/libs/socketio.jar
+#cp libs/WebSocket.jar ../../engine-storefront/unity/Java\ Source/libs/WebSocket.jar
+
+#cp libs/square-otto-1.3.2.jar ../../back-of-generator/templates/android/example-proj/skeleton/libs/square-otto-1.3.2.jar
+#cp libs/socketio.jar ../../back-of-generator/templates/android/example-proj/skeleton/libs/socketio.jar
+#cp libs/WebSocket.jar ../../back-of-generator/templates/android/example-proj/skeleton/libs/WebSocket.jar
+
+#echo OK

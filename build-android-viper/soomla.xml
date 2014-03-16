@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soomlaandroidviper" default="all">
+  
+  
+  <property file="soomla.properties"/>
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+  </patternset>
+  <patternset id="compiler.excluded">
+    <exclude name="${module.soomlaandroidviper.basedir}/gen/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.apk"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+
+  <path id="jdk.classpath.android_4.4.2">
+    <fileset dir="${jdk.home.android_4.4.2}">
+      <include name="platforms/android-19/android.jar"/>
+      <include name="platforms/android-19/data/res"/>
+      <include name="tools/support/annotations.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.android_4.4.2}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.android_4.4.2}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.android_4.4.2"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <!-- Modules -->
+  <import file="${basedir}/../build-android-store/module_soomlaandroidstore.xml"/>
+  
+  <import file="${basedir}/module_soomlaandroidviper.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.soomlaandroidviper, clean.artifact.androidviper:jar" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.soomlaandroidstore, compile.module.soomlaandroidviper" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.androidviper:jar" value="${soomla.output.dir}/artifacts"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.AndroidViper.jar" value="${artifacts.temp.dir}/AndroidViper.jar"/>
+  </target>
+  
+  <target name="clean.artifact.androidviper:jar" description="clean AndroidViper:jar artifact output">
+    <delete dir="${artifact.output.androidviper:jar}"/>
+  </target>
+  
+  <target name="artifact.androidviper:jar" depends="init.artifacts, compile.module.soomlaandroidviper" description="Build &#39;AndroidViper:jar&#39; artifact">
+    <mkdir dir="${artifact.output.androidviper:jar}"/>
+    <jar destfile="${temp.jar.path.AndroidViper.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset file="${module.soomlaandroidviper.basedir}/META-INF/MANIFEST.MF" prefix="META-INF"/>
+      <zipfileset dir="${soomlaandroidviper.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.AndroidViper.jar}" tofile="${artifact.output.androidviper:jar}/${soomla.filename}.jar"/>
+    <copy file="${module.soomlaandroidviper.basedir}/libs/socketio.jar" tofile="${artifact.output.androidviper:jar}/socketio.jar"/>
+    <copy file="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar" tofile="${artifact.output.androidviper:jar}/square-otto-1.3.2.jar"/>
+    <copy file="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar" tofile="${artifact.output.androidviper:jar}/sponsorpay-android-sdk.jar"/>
+    <copy file="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar" tofile="${artifact.output.androidviper:jar}/WebSocket.jar"/>
+	<copy file="${soomlaandroidstore.output.dir}/AndroidStore.jar" tofile="${artifact.output.androidviper:jar}/AndroidStore.jar"/>	
+	<delete dir="${artifact.output.androidviper:jar}/com"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.androidviper:jar" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

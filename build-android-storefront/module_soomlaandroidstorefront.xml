@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_soomlaandroidstorefront" default="compile.module.soomlaandroidstorefront">
+  
+  <property name="module.jdk.home.soomlaandroidstorefront" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.soomlaandroidstorefront" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.soomlaandroidstorefront" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.soomlaandroidstorefront" value="${compiler.args}"/>
+  
+  <property name="soomlaandroidstorefront.output.dir" value="${module.soomlaandroidstorefront.basedir}/out/production/SoomlaAndroidStorefront"/>
+  
+  <path id="soomlaandroidstorefront.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="soomlaandroidstorefront.module.production.classpath">
+    <path refid="${module.jdk.classpath.soomlaandroidstorefront}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+	<pathelement location="${soomlaandroidviper.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  <path id="soomlaandroidstorefront.runtime.production.module.classpath">
+    <pathelement location="${soomlaandroidstorefront.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <path refid="soomlaandroidstore.runtime.production.module.classpath"/>
+	<path refid="soomlaandroidviper.runtime.production.module.classpath"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  <path id="soomlaandroidstorefront.module.classpath">
+    <path refid="${module.jdk.classpath.soomlaandroidstorefront}"/>
+    <pathelement location="${soomlaandroidviper.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <pathelement location="${soomlaandroidstore.output.dir}"/>
+	<pathelement location="${soomlaandroidviper.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  <path id="soomlaandroidstorefront.runtime.module.classpath">
+    <pathelement location="${soomlaandroidstorefront.output.dir}"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/square-otto-1.3.2.jar"/>
+    <path refid="soomlaandroidstore.runtime.module.classpath"/>
+    <path refid="soomlaandroidviper.runtime.module.classpath"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/WebSocket.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/socketio.jar"/>
+    <pathelement location="${module.soomlaandroidviper.basedir}/libs/sponsorpay-android-sdk.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.soomlaandroidstorefront">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.soomlaandroidstorefront">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.soomlaandroidstorefront"/>
+  </patternset>
+  
+  <path id="soomlaandroidstorefront.module.sourcepath">
+    <dirset dir="${module.soomlaandroidstorefront.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.soomlaandroidstorefront" depends="compile.module.soomlaandroidstorefront.production" description="Compile module SoomlaAndroidStorefront"/>
+  
+  <target name="compile.module.soomlaandroidstorefront.production" depends="compile.module.soomlaandroidstore, compile.module.soomlaandroidviper" description="Compile module SoomlaAndroidStorefront; production classes">
+    <mkdir dir="${soomlaandroidstorefront.output.dir}"/>
+    <javac destdir="${soomlaandroidstorefront.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.soomlaandroidstorefront}/javac">
+      <compilerarg line="${compiler.args.soomlaandroidstorefront}"/>
+      <bootclasspath refid="soomlaandroidstorefront.module.bootclasspath"/>
+      <classpath refid="soomlaandroidstorefront.module.production.classpath"/>
+      <src refid="soomlaandroidstorefront.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.soomlaandroidstorefront"/>
+    </javac>
+    
+    <copy todir="${soomlaandroidstorefront.output.dir}">
+      <fileset dir="${module.soomlaandroidstorefront.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.soomlaandroidstorefront"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.soomlaandroidstorefront" description="cleanup module">
+    <delete dir="${soomlaandroidstorefront.output.dir}"/>
+  </target>
+</project>
